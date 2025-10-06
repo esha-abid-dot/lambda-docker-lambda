@@ -18,6 +18,9 @@ phases:
       - docker push 679029767004.dkr.ecr.us-east-1.amazonaws.com/e-lambda-repo:latest
       - echo Writing image definitions file...
       - printf '[{"name":"containerName","imageUri":"%s"}]' 679029767004.dkr.ecr.us-east-1.amazonaws.com/e-lambda-repo:latest > imagedefinitions.json
+        - echo Deploying to Lambda...
+      - aws lambda update-function-code --function-name e-lambda-contain --image-uri 679029767004.dkr.ecr.us-east-1.amazonaws.com/e-lambda-repo:latest
+
 
 artifacts:
   files: imagedefinitions.json
